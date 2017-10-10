@@ -1,0 +1,34 @@
+%
+% prefazione.tex
+% 
+\Preface
+% la macro \Preface inserisce i seguenti comandi, commentati a seguire come '%p%'
+% usare ques in modo da comporre correttamente la numerazione di pagina araba.
+% se non si vuole scrivere la prefazione, allora inserire i comandi
+% \chapter{preambolo} \prefacePageNumbering
+%   oppure
+% \chapter*{un preambolo, (pagine in romano)}
+% \addcontentsline{toc}{chapter}{Il primo capitolo, non numerato} 
+% \prefacePageNumbering 
+%
+%p%\chapter*{Prefazione} % se language=en, \chapter*{Preface}!
+%p% nota: NON cambiare le righe seguenti --------------
+%p% aggiunge 'Prefazione' all'indice, ma non numera 'prefazione'
+%p% riallinea la numerazione di pagina, in funzione della presenza o meno 
+%p% di pagine bianche iniziali (copertina fornita a parte dall'editore)
+%p%\addcontentsline{toc}{chapter}{Prefazione}
+%p%\prefacePageNumbering
+% ----------------------------------------------------
+%
+% iniziare a scrivere qui sotto
+Qui scrivere la prefazione. \\
+\begin{flushright}
+{\emph{L'autore.}}
+\end{flushright}
+
+
+
+% ---------------------------------------------------------------------
+\chapter*{Sommario} \addcontentsline{toc}{chapter}{Sommario}
+%% \newpage \vspace*{1cm} \section*{\Huge Piano dell'opera} \vspace*{1cm}
+Qui scrivere il sommario, se piace, altrimenti cancellare, o commentare questa e le righe precedenti (fino alla riga di commento con tanti caratteri '-').\\

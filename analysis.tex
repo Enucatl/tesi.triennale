@@ -1,0 +1,69 @@
+\chapter{$\Zboson^0 \rightarrow e^+e^-$ analysis}   \label{chap:analysis}
+% ----------------------------------------------------------
+The main experimental signature of the $\Zboson^0\rightarrow e^+e^-$ decay is the presence of two isolated, high $p_t$ electrons. This signal needs to be extracted from the background processes: events containing real electrons and events containing charged hadrons wrongly reconstructed as electrons.
+     \section{Real electron sources and isolation}
+     Several physics processes other than the $\Zboson$ decay may produce real electrons. The most important are the $W\rightarrow e \nu$, $b/c \rightarrow e$ and $t\bar t$. The main tool for background rejection is the electron isolation. Heavy quarks like the $b$ and the $c$ have a semi-leptonic decay mode which gives rise to an electron, with a branching fraction of about 10\%. However, the electron is immersed in the products from the quark fragmentation, \tLatin{i.e.} a jet, hence not isolated. The probability for the occurrence of isolated electrons is very small (figure~\ref{fig:mvaiso}). We therefore look for tracks close to the candidate electron track, in a \qmo{}cone\qmc{} of radius $\Delta R = \sqrt{\Delta\phi^2 + \Delta\eta^2} = 0.3$ and ask for \tConcept{relative isolation}. That is the sum of the $p_t$ of all the tracks divided by the $p_t$ of the electron, henceforth shortly dubbed $\sum p_t / p_t$, must be smaller than $0.14$ in the barrel and $0.17$ in the endcap.
+\section{Fake electrons and identification}
+Charged hadrons, mostly pions, may get identified as electrons. Pions are an extremely common product of proton physics, due to QCD effects. They are eliminated by the Particle Flow algorithm described in chapter~\ref{chap:particle.flow}, through tracker-ECAL matching and multivariate analysis.
+     In this analysis the identification cut requires an $mva > 0.25$ for barrel electrons and $mva > 0.1$ for endcap electrons. A looser cut with $mva > -0.1$ is applied by default in the particle flow algorithm.
+
+     \section{Trigger and Dataset}
+     The CMS detector must have a highly selective online trigger system. At the design LHC centre-of-mass energy and instantaneous luminosity, the bunch-crossing rate would be \unit[40]{MHz}, corresponding to about $10^9$ proton-proton interactions per second. Since the achievable mass storage rate is about 150 Hz, the online selection has to provide a total rejection factor of $10^6$ or $10^7$.
+     CMS has a two-level trigger.
+     \begin{packed_description}
+         \item[Level 1 Trigger (L1):] the L1 is a hardware trigger. It exploits course granularity information from calorimeters and muon chambers to identify electromagnetic clusters, muons, jets and missing $E_t$. Its processing time per event is on the order of a microsecond.
+         \item[High Level Trigger (HLT):] the HLT is a software trigger run on a farm of commercial CPUs, and has access to all event data, allowing for precise object reconstruction and energy/momentum evaluation. The HLT processing time is around 0.1 seconds per event.
+     \end{packed_description}
+     The dataset is an \qmo{}$e\gamma$\qmc{} selection from runs 136033--140126, reprocessed on July 15th with CMSSW 3.7.0 patch 4. The $e\gamma$ dataset is defined by selecting on the HLT bits, in order to have a sample rich in electrons and photons, consequently speeding up the analysis by reducing the amount of data to process. The L1 trigger requirement for this dataset is called \qmo{}L1SingleEG5\qmc{}, requiring at least one electromagnetic object, \tLatin{i.e.} an electron or a photon, with $E_t > \unit[5]{GeV}$.
+
+     The HLT requirements are dubbed the HLT\_Ele15\_LW\_L1R and are more sophisticated, as they include one electron with $E_t > \unit[15]{GeV}$, an ECAL super-cluster with $E_t > \unit[5]{GeV}$ and small hadronic fraction $H/E < 0.2$ . At this stage, no isolation cuts are applied.
+     
+     After these selections, the CMS collaboration certifies a \qmo{}good runs\qmc{} list based on the conditions of the detector. Another customized filter, requiring at least one electron with $p_t > \unit[15]{GeV/c}$, was applied at this stage in order to produce a manageable dataset.
+
+     The total integrated luminosity in this analysis corresponds to $\unit[166.9]{nb^{-1}}$, with ten millions events.
+
+     \section{Fast Simulation Monte Carlo samples}
+     The Monte Carlo datasets needed were especially generated for this analysis. Studies from the electroweak analysis team based on the Full Simulation~\cite{ewk:cms.pas.wz.xs} show that the main backgrounds are the QCD-EM enriched and $b/c\rightarrow e$ samples, with $\Zboson\rightarrow \tau\tau$, $t\bar t$ and $W\rightarrow e\nu$ accounting for less than one thousandth of the total background.
+     PYTHIA 6 was employed for the generation step with a parton $\hat{p_t}$ between $20$ and $\unit[170]{GeV/c}$. Then the $b/c\rightarrow e$ filter selects events with semi-leptonic decays of $b$ and $c$ quarks. The FastSim EM enrichment employed an entirely new technique. Instead of the generation cuts usually applied for the FullSim samples, all events were reconstructed, without any generation cut. Then the same cut used for the data was applied after the reconstruction, by requiring at least one electron with $p_t > \unit[15]{GeV/c}$. This workflow would not be possible with a FullSim generation, as the complete simulation and reconstruction of one event would take several minutes. The efficiency of these filters can be of the order of $10^{-5}$, and that would yield a generation time of more than two months per event. On the other hand, a FastSim reconstruction can be performed in around 0.2 seconds. Therefore we can afford a filter after the simulation process. Moreover, the cut on the background is actually the same as the cut on the real data, which greatly reduces the chance of introducing an unexpected bias in the analysis. The MC signal is a pure $\Zboson\rightarrow ee$ sample with 100,000 events. A total of almost 3,000 jobs have been run on the LHC Computing Grid, over a period of a week. The number of generated and selected events, cross sections and filter efficiency are shown in table~\ref{tab:fastsim_datasets}.
+     \begin{table}[hbp]
+         \input{tables/fastsim.datasets}
+     \end{table}
+
+     A thorough study of background processes with the Fast Simulation was never attempted before, but immediately showed its value. Applying the filter at the generation step, as in the FullSim, introduces a bias as shown in figures~\ref{fig:valid_pt} and~\ref{fig:bad_full}. As a result, the background in the lower invariant mass spectrum is underestimated by a factor five, while the FastSim reconstruction filter described above is more accurate. \tRemark{All the plots are normalized to the integrated luminosity of the data.} The background is overestimated in the high end of the spectrum, but the signal to noise ratio is more consistent with the observed data. Unfortunately, the samples are smaller than their FullSim counterparts, leading to larger statistical noise, but they will be increased in the future.
+     \FigTwoHScaled{bad_full1}{bad_full2}{Fast/FullSim background comparison}{Comparison of Full (left) and Fast (right) simulated background. The FullSim sample shows a bias introduced by the EM-enriching filter in the low invariant mass region. Basic cut.}{bad_full}{.6\textwidth}{.6\textwidth}
+     \section{Selection of the $\Zboson$ candidates}
+     In order to produce a pure signal sample, the isolation and identification cuts described above are applied, along with other kinematic selections. Distributions for $mva$ and $\sum p_t / p_t$~(figure \ref{fig:mvaiso}) show that these are indeed the most important variables for the selection of $\Zboson$ candidates. Cutting on isolation alone yields an impressively good selection of the $\Zboson$ decays, as shown in figure~\ref{fig:fulliso}.
+\begin{table}[hbp]
+    \input{tables/sel.description}
+\end{table}
+     Also, the $b/c \rightarrow e$ sample accounts for a substantial fraction of the high-mva electrons, but is almost completely suppressed when isolation is enforced. On the other hand, the QCD background contains both real and fake electrons, but the combined cuts are again able to eliminate it altogether.
+     
+     As high $p_t$ electrons are expected from a $\Zboson\rightarrow ee$ decay, a $p_t$ greater than \unit[15]{GeV/c} is required for both electrons and at least one of them must be matched to the HLT. This reduces the background coming from soft QCD interactions. Almost all the electrons in the simulated $\Zboson\rightarrow ee$ sample lie in the high-$p_t$ end of the spectrum (figure~\ref{fig:pt}).
+     \FigTwoHScaled{ele1ID_withdata_empty_selection}{ele1IsoRel_withdata_empty_selection}{identification and isolation distributions}{Identification (left) and isolation (right) variables for the leading electron. FastSim background. Basic cut.}{mvaiso}{.6\textwidth}{.6\textwidth}
+     \FigScaled{ele1Pt_withdata_empty_selection}{electron $p_t$ distribution, no selections.}{Distribution of the $p_t$ for the leading electron. FastSim background. Basic cut.}{pt}{0.6\textwidth}
+     Pseudorapidity appears not to be an important factor for this analysis, and a loose cut with $\lvert \eta \rvert < 2.5$, basically covering all the acceptance region of the detector, only excluding the crack with $1.4442 < \lvert \eta \rvert < 1.5660$, is applied. Finally, the charge of the two electron tracks is checked, so that only electron-positron pairs, that is tracks with opposite charge, are kept.
+
+     The complete list of selections is shown in table~\ref{tab:sel_description}, while tables~\ref{tab:sel.num} and~\ref{tab:sel.eff} contain the details of the events selected at each step of the analysis. The effect of the cuts on the invariant mass distribution is shown in figures~\ref{fig:ptetaiso} and~\ref{fig:fulliso}.
+     \FigTwoHScaled{ZMass_withdata_pt_eta_selection}{ZMass_withdata_id_oppcharge_selection}{$p_t$, $\eta$ and identification selections}{Dielectron invariant mass with HLT, $p_t$ and $\eta$ selections on the left. Identification and opposite charge are also enforced on the right. FastSim background.}{ptetaiso}{.6\textwidth}{.6\textwidth}
+     \FigTwoHScaled{ZMass_withdata_full_selection}{ZMass_withdata_only_isolation}{Full selection of $\Zboson$ candidates}{Fully selected $\Zboson$ candidates with HLT, $p_t$, $\eta$, identification, opposite charge and isolation on the left. The effect of the isolation cut alone is shown on the right. FastSim background.}{fulliso}{.6\textwidth}{.6\textwidth}
+\begin{table}[htbp]
+    \input{tables/efficiency_errors}
+\end{table}
+\begin{table}[htbp]
+    \input{tables/sel.eff}
+\end{table}
+\section{Cross section measurements}
+The cross section is calculated as $\sigma = N / L\varepsilon$. The
+statistical error on the cross section is inferred from the statistical
+error on the efficiency as reported in table~\ref{tab:sel.eff}. The relative
+statistical error is 7.7\%. The systematic error on the luminosity is not
+included, and according to~\cite{ewk:luminosity.uncertainty} amounts to
+11\%. The cross section, without systematic errors whose determination is beyond the scope of this study, is
+\begin{equation*}
+    \sigma(pp\rightarrow \Zboson(\gamma^*) + X \rightarrow e^+e^- + X) = \unit[0.926\pm0.071\text{(stat.)}\pm0.101\text{(lumi.)}]{nb}
+\end{equation*}
+This measurement in in excellent agreement with the Standard Model prediction of $\sigma = \unit[0.97\pm0.04]{nb}$.
+\section{Conclusion}
+The Fast Simulation of the CMS detector was successfully employed for the first time in a new workflow for the study of background processes to the $\Zboson \rightarrow e^+e^-$ production. A preliminary measurement of the production cross section of the $\Zboson^0$ boson was made. Within large statistical uncertainties, no disagreement with the predictions of the Standard Model have been observed. 
+
+

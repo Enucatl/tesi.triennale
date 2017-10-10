@@ -1,0 +1,54 @@
+\chapter{Introduction to LHC and CMS}\label{chap:intro}
+% ------------------------------------------
+\resetPageNumbering 
+% -------------------------------------------
+
+\section{The Standard Model}
+The Standard Model of particle physics has been extremely successful at describing the observed spectrum of particles and their interactions, but nevertheless problems exist:
+    \begin{packed_item}
+        \item some predictions break down at the TeV energy scale without extending the theory, with more serious flaws appearing at the Planck scale ($\sim \unit[10^{19}]{GeV}$);
+        \item the Higgs boson, the mechanism responsible for the mass of the particles, has not yet been observed;
+        \item gravity has not been integrated into the SM.
+    \end{packed_item}
+Moreover, astonomical observations point to the existence of so called dark matter and dark energy. The business of particle physics also extends to the search for these unknown kinds of matter, which account for 90\% of the mass of the universe.
+
+Many theories were developed during the last decades in order to free the SM from these issues, such as Supersimmetry, which is one of its most popular extensions. 
+
+\section{The Large Hadron Collider}
+The LHC is a particle accelerator resting between 50 and \unit[100]{m} underground outside Geneva, Switzerland, and extending into France. As a hadron collider operating at a centre-of-mass energy almost an order of magnitude greater than its predecessors, the LHC was built to resolve many of the shortcomings of the Standard Model. 
+This task requires a high centre-of-mass energy ($\sqrt{s} = \unit[14]{TeV}$ nominal) and luminosity ($\unit[10^{34}]{cm^{-2}s^{-1}}$) to be able to observe new particles with a large mass and a low production cross section.
+
+\section{The Compact Muon Solenoid}
+CMS~\cite{intro:cms} is a general purpose detector based on interlocking cylindrical subdetectors in the central \qmo{}barrel\qmc{} region, closed by two endcaps, all placed coaxially with the beam and centred on the beam interaction point.
+There are four main subdetectors:
+\begin{packed_description}
+   \item[silicon tracker: ] a cylindrical detector with a length of \unit[5.5]{m}. It is equipped with three layers of \unit[$100\times150$]{\micro m} pixels on the innermost part, four layers of $\unit[10]{cm} \times \unit[180]{\micro m}$ silicon strips, followed by six $\unit[25]{cm} \times \unit[180]{\micro m}$ strip layers, out to a radius of \unit[1.1]{m}. The system is completed by endcaps, which consist of two disks in the pixel detector and three plus nine disks in the strip tracker.
+    \item[electromagnetic calorimeter: ]the ECAL is made of 61,200 lead tungstate crystals in the barrel and 7,324 in each endcap. The base of the crystals is about $\unit[2\times2]{cm}$ in size, with a depth of $\unit[23]{cm}$, corresponding to 25 radiation lengths.
+    \item[hadronic calorimeter: ] the HCAL is a sampling calorimeter made by plastic scintillators interleaved with brass layers.
+    \item[muon chambers: ]there are three muon detector systems at CMS, drift tubes in the barrel, cathode strip chambers in the endcap and resistive plate chambers in both regions.
+\end{packed_description}
+
+The design of the CMS detector is focused on excellent lepton and photon reconstruction, with near $4\pi$ steradian coverage. This is achieved by means of a superconducting \unit[3.8]{T} solenoid containing the calorimeters and a high-precision tracking system. The decision to concentrate on lepton and photon reconstruction was driven by the physics we want to investigate, characterized by high $p_t$ electrons and the need to extract them from background QCD. As an example, the most promising mode for the Higgs boson decay is $H\rightarrow \gamma\gamma$. A good diphoton mass resolution will allow us to recognize this mode relatively cleanly.
+
+This work uses the standard CMS coordinate system: the origin is centred at the nominal collision vertex of the experiment, the $y$-axis points vertically upwards and the $x$-axis points to the centre of the LHC ring. The $z$-axis lies along the beam direction. The polar angle $\theta$ is measured relative to the $z$-axis, and is used to calculate the pseudorapidity $\eta = -\log\tan(\theta/2)$. The azimuthal angle $\phi$ is measured relative to the $x$-axis, in the $xy$-plane.
+
+Views of the detector are shown in figures~\ref{fig:cmsslice} and~\ref{fig:cmsexpanded}.
+\Figure[file=CMS_Slice, pos=htbp, width=\textwidth,label=cmsslice]{Slice view of the CMS detector.}
+\Figure[file=Schematic, pos=htbp, width=\textwidth,label=cmsexpanded]{Expanded view of the CMS detector.}
+
+\section{The $\Zboson^0$ boson}
+In the Standard Model, the $\Zboson$ and $\mathrm{W}$ bosons are the weak force carriers. The measurement of their decays to charged leptons at the LHC is important for many reasons: it is a benchmark for lepton reconstruction and identification, a precision test for perturbative QCD and parton distribution functions of the proton, and a possible estimator of the integrated luminosity for proton collisions.
+
+At the LHC, QCD predictions in next-to-next-to leading order (NNLO) in the strong coupling $\alpha_S$ exist for the matrix elements describing inclusive $\Zboson$ production~\cite{ewk:zproduction}, giving a cross section with a few percent uncertainty.
+The most recent results from the CMS detector~\cite{ewk:cms.pas.wz.xs} measured a cross section $\sigma(pp\rightarrow \Zboson(\gamma^*) + X \rightarrow e^+e^- + X) = \unit[0.882^{+0.077}_{-0.073}\text{(stat.)}^{+0.042}_{-0.036}\text{(syst.)}\pm0.097\text{(lumi.)}]{nb}$, in good agreement with the NNLO predictions of a $\sigma = \unit[0.97\pm 0.04]{nb}$.
+\begin{figure}[hp]
+    \begin{center}
+        \input{z.diagram}
+    \end{center}
+    \caption{$Z$ boson production in pp collisions.}
+    \label{fig:z.diagram}
+\end{figure}
+Other important parameters are the $\Zboson$ mass $m_Z = \unit[91.1876\pm 0.0021]{GeV/c^{2}}$ with a decay width $\Gamma = \unit[2.4952\pm 0.0023]{GeV/c^2}$. The decay channel we are investigating accounts for \unit[$3.363\pm0.004$]{\%} of $\Zboson$ decays~\cite{intro:pdg}.
+
+     \FigScaled{lhcxs}{lhc cross section}{Cross section for the production of various particles as a function of centre-of-mass energy.}{lhcxs}{0.4\textwidth}
+

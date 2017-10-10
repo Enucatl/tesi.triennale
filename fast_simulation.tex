@@ -1,0 +1,96 @@
+%
+% void.tex - ...
+%
+
+
+% ----------------------------------------------------------
+% author: 
+% creation date: 2009-01-21
+% main file: 
+% format: ISO 8859-15 (verifica lettere accentate: è é à ù ì ò  (\`e \'e \`a \`u \`i \`o) 
+%
+% --- revision history (first line is the more recent item)
+% yyyy-mm-dd   comment
+% ----------------------------------------------------------
+
+% ----------------------------------------------------------------
+% storia delle revisioni
+% ----------------------------------------------------------------
+% NOTE
+% 1. file pdf - call build.sh
+%
+% 2. gmeepd class should be loaded with option "encoding=latin1" (i.e. the default value)
+% 3. Verifica lettere accentate: è é à ù ì ò  (\`e \'e \`a \`u \`i \`o)
+% ----------------------------------------------------------
+
+\chapter{Fast simulation of the CMS detector} % \label{chap:...}
+
+% ----------------------------------------------------------
+%\section{} % \label{sec:...}
+
+
+% ----------------------------------------------------------
+%\section{}
+
+% ----------------------------------------------------------
+%\section{}
+
+
+
+% ----------------------------------------------------------
+% promemoria     
+%   - virgolette:  \qmo{}... ...\qmc{}
+%   - voce di indice analitico \Index{}
+%   - riferimento bibliografico \cite{label-d-un-file-bibtex}
+%
+% ----------------------------------------------------------
+% quick reference: \Figure macro
+%
+% file specification is without extention and should be located in 'images/' directory
+% width,height can be specified in terms of \the\textwidth or \the\textheight (e.g. \the.5\textheight)
+% rotate can be specified as rotate=true (no spec-> rotate=false)
+% label=<lab> will be referred by in the amin text \ref{fig:<lab>}
+%
+%
+% ----------------------------------------------------------
+%                \addcontentsline{toc}{section}{Introduzione}
+% % {} `` 
+Accurate Monte Carlo simulations are needed in order to make sense of the data and search for new physics phenomena. The physics of the collisions is simulated by event generators such as PYTHIA~\cite{fs:pythia}. Then, the propagation of the particles in the detector has to be worked out.
+Two different types of simulation are used by the CMS collaboration: a GEANT4-based~\cite{fs:geant} simulation, known as the \qmo{}Full\qmc{} Simulation, and a detector model with simplified geometry, response evaluation and pattern recognition to decrease the processing time per event, the \qmo{}Fast\qmc{} Simulation~\cite{fs:fast.simulation}.
+The main goal of the Fast Simulation is to produce simulated data at a level of quality that can be used in physics analysis at a rate 100 to 1000 times faster than the Full Simulation (see table~\ref{tab:fast.vs.full}).
+\begin{table}[hp]
+    \input{tables/fast.vs.full}
+\end{table}
+ Only with such a dramatic increase in the generation rate the large volume of data needed, on the order of billions of events, can be produced. The main features of this type of simulation are briefly described below:
+\begin{packed_description}
+    \item[CMS geometry:] the FastSim describes the detector with a simplified geometry of nested cilyndrical layers. The particles are propagated from one layer to the next.
+    \item[Material effects:] five effects are taken into account. These are bremsstrahlung, photon conversion, multiple Coulomb scattering, energy loss through ionization and nuclear interactions. All of these are calculated analytically, except for nuclear interactions, since no analytical description is sufficient to describe the effect. Cross sections are taken from the PDG and the kinematics are derived from single particle collisions saved beforehand.
+    \item[Track reconstruction:] the reconstruction is not usually part of the simulation. The FastSim includes it because, given the low fake rate in the reconstruction, it is possible to emulate it at a lower computational cost. Only the hits of the simulated track are used to make a track candidate. 
+    \item[Muons:] muons are propagated through the tracker and calorimeters with average energy loss, then $dE/dx$ and multiple scattering in the iron yokes of the muon chambers are computed. Muon simulated hits are produced in all sections of the muon systems.
+    \item[Calorimeters:] electron showers in the ECAL are simulated with the Grindhammer~\cite{fs:grindhammer} parametrization. Photons undergo pair conversions based on the number of radiation lengths they have traversed. Detector effects such as energy leakage into the crystal gaps and into the HCAL are included, as well as electronic noise. Shower simulation in the HCAL is similar, with different types of particles parametrized from FullSim results.
+\end{packed_description}
+
+\section{Validation}
+Validation of the Fast Simulation samples is based on tracking observables. Comparisons between the Fast Simulation and the Full Simulation are shown for $p_t$, $\eta$, $\phi$, $f_{\mathrm{brem}}$ and $E$ distributions.
+
+The electron tracks considered for this validation analysis come from QCD samples generated with PYTHIA 6 with an electromagnetic enriching filter which keeps events with at least one electron with $p_t > \unit[15]{GeV/c}$. This is the same filter used for the real data. For simplicity, the same samples and analysis code has been used for the validation. As a result, in the validation plots, only the events with at least one reconstructed electron pair are have been used.
+Unfortunately, this reduces the available statistics for this study. The FullSim and Data plots are here normalized to the integral of the corresponding FastSim sample. 
+
+The main variables used for the present physics analysis, namely isolation
+and identification (figure~\ref{fig:valid_id_iso}) show extremely good
+agreement between the two simulation modes. Tracking variables such as the
+normalized $\chi^2$ and bremsstrahlung fraction
+(figure~\ref{fig:valid_chi2_fbrem}) show that the simplified pattern
+recognition used in the FastSim tends to produce better track fits than the
+real one. The $\eta$ distribution (figure~\ref{fig:valid_eta_phi}) shows a
+large disagreement between the three datasets in the endcap region. The
+difference between the Fast and Full simulation is entirely due to the
+generation selection, as $\eta$ and $p_t$ are strongly correlated. In the
+data sample we can see the effect of a misalignment in the endcap region
+between the tracker and ECAL. This should be fixed in new versions of CMS
+software.
+The $p_t$ distribution (figure~\ref{fig:valid_pt}) shows the bias introduced by the FullSim generation filter, which is explained in detail in chapter~\ref{chap:analysis}. Note that the bias cannot be eliminated by simply applying a cut on the $p_t$.
+     \FigTwoHScaled{ele1ID_QCD3080_full_vs_fast_vs_data_empty_selection}{ele1IsoRel_QCD3080_full_vs_fast_vs_data_empty_selection}{identification and isolation distributions}{mva output, used for identification purposes (left) and isolation (right) variables for the leading electron. Comparison between FastSim, FullSim and data.}{valid_id_iso}{.6\textwidth}{.6\textwidth}
+ \FigTwoHScaled{ele1FbremMode_QCD3080_full_vs_fast_vs_data_empty_selection}{ele1NormalizedChi2_QCD3080_full_vs_fast_vs_data_empty_selection}{fbrem and chi2 distribution}{Bremsstrahlung fraction (left) and normalized $\chi^2$ (right) variables for the leading electron. Comparison between FastSim, FullSim and data. The Fast Simulation simplified pattern recognition reconstructs the tracks with a slightly better fit than the standard one. Also, the bremsstrahlung effect needs to be fine tuned so that the energy loss can be better reproduced.}{valid_chi2_fbrem}{.6\textwidth}{.6\textwidth}
+     \FigTwoHScaled{ele1Eta_QCD3080_full_vs_fast_vs_data_empty_selection}{ele1Phi_QCD3080_full_vs_fast_vs_data_empty_selection}{eta and phi distributions}{$\eta$ (left) and $\phi$ (right) distributions for the leading electron. Comparison between FastSim, FullSim and data. The $\eta$ distribution is affected by the misalignment of the endcap tracker and ECAL, leading to a much lower efficiency in the data.}{valid_eta_phi}{.6\textwidth}{.6\textwidth}
+     \FigTwoHScaled{ele1Pt_QCD3080_full_vs_fast_vs_data_empty_selection}{ele1Pt_QCD3080_full_vs_fast_vs_data_pt15ele1}{pt distributions}{$p_t$ distribution without selections (left) and with $p_t > \unit[15]{GeV/c}$ (right). The bias introduced by the FullSim generation cuts is shown. It is not eliminated by a subsequent cut in $p_t$.}{valid_pt}{.6\textwidth}{.6\textwidth}

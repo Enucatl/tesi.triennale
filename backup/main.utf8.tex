@@ -1,0 +1,228 @@
+%
+% main      (sostituire con il titolo effettivo)
+%           template per la edizione di un nuovo documento (tesi, tesina,...). 
+
+%
+%           questo è il file 'master',  la compialzione latex inizia da questo file!
+%           è possibile ridenominare questo file in <newname> (es.in 'laMiaTesi.tex'): 
+%           in tal caso, per la compilazione è necessario eseguire `build.sh <newname_noext>' 
+%           (es. './build.sh laMiaTesi')
+%
+
+%
+% NOTE: 
+%     1.formato file (codfica)
+%          questo file è in formato UTF-8
+%          se le lettere accentate non sono correttamente gestite bisogna cambiare le
+%          impostazioni del text editor in modo che vengano letti/scritti file in formato 
+%          UTF-8 (windows per default usa il formato UTF-8 o similare)
+%          Verifica lettere accentate: è é à ù ì ò  (\`e \'e \`a \`u \`i \`o)
+%
+%     2.compilazione (generazione pdf)
+%          per generare il file pdf seguire i seguenti passi: 'tex->dvi->ps->pdf', e cioè
+%          - tramite latex generare il file .dvi 
+%          - tramite dvips generare il file .ps
+%          - tramite ps2pdf generare il file .pdf
+%          studiare il file 'build-simple.sh' (oppure build.sh) in proposito
+%
+%     3. istruzioni (fondamentali) per l'uso di questo template
+%          a) provare a eseguire ./build-simple.sh, oppure dal programma scelto per l'edizione
+%          (kile, texniccenter,...) impostare questo documento come 'master document' e
+%          compilare, seguendo descritti nella nota 2
+%          b) per iniziare a scrivere un nuovo capitolo:
+%             - copiare il file template/void.tex in un file <newfile.tex> di questa directory
+%               es 'cp template/void.tex cap1.tex'
+%             - trovare in questo la sezione '--- corpo del testo --- --- ---'
+%               e aggiungere la riga \include{<newfile>} (es. \include{cap1})
+%             - aprire il file <newfile.tex> (es cap1.tex) e scrivere il testo 
+%               (suggerimenti in proposito sono 'beyond the scope'...)
+%
+% - nella versione finale, è opportuno cancellare le righe di commento da qui in su!
+
+%
+%  main.tex - template per la redazione di documenti 
+%             (descrizione in una riga del lavoro, es. 'i miei amori: tomo I')
+%             MASTER FILE
+
+% ---------------------------------------------------------------  
+% generazione file pdf
+%     - eseguire build.sh
+
+% ----------------------------------------------------------------
+% storia delle revisioni
+%    qui indicare le principali modifiche e le date corrispondenti (yyyy-mm-dd)
+%    l'ultima modifica è scritta nella riga di  commento più in alto
+%
+% esempio. 
+% 2008-12-03   creata macro \Figure[]{}, ermette di inserire una figura con opzioni diverse
+% 2008-11-26  definito class file 'gmeepd.cls', include i comandi prima 
+%             sparsi su molti file 
+% 
+% ----------------------------------------------------------------
+
+
+\documentclass[status=draft, cover=work]{gmeepd}
+%\documentclass[cover=work]{gmeepd}
+
+% --- class options 
+% booktype: a4book, lulu6x9, utet
+%           the book type determines page size, geometry.etc.
+% encoding: utf8, latin1, iso8859-15
+%           encoding determine the file encoding expected by latex
+% fontsize: 10pt, 11pt, 12pt
+%           fontsize is the size of font alongsize the document
+% language: it, italiano, en. english
+%           language is default language that will be used
+% cover:    nocover, work (elaborato), dispensa, libro, thesis (tesi), tesina, tesiphd, user
+%           determine the cover format
+% foreigncover (true if option specified, false otherwise)
+%           determine additional white pages to be inserted at the beginning
+% coverfile <path to file>
+%           define the file name containing a user's defined cover (when cover=user)
+% status:   normal, draft, reserved, debug
+%           determine the behavior of some macros, and how some text is printed 
+%           in the ps/pdf file
+% usercmd:  path to file where user commands are defined (default: res/usercmd.input.tex)
+%
+% --- alcuni esempi
+%\documentclass{gmeepd}
+%\documentclass[cover=work]{gmeepd}
+%\documentclass[bookType=a4book,encoding=iso8859-15,cover=work,language=it]{gmeepd}
+%\documentclass[cover=tesi,language=en]{gmeepd}
+%\documentclass[bookType=utet,foreignCover]{gmeepd}
+%\documentclass[cover=user,coverfile=res/myCover.tex]{gmeepd}
+%\documentclass[bookType=lulu6x9,encoding=utf8,fontsize=12pt,language=en,cover=work,status=draft]{gmeepd}
+%
+%\documentclass[bookType=lulu6x9,cover=user,coverfile=res/sample-cover.tex,status=debug,language=it]{gmeepd}
+%
+%\documentclass[bookType=lulu6x9,encoding=utf8,fontsize=12pt,language=en,cover=work,foreignCover,status=draft]{gmeepd}
+
+
+
+% --------------------------------------------------------------------------------------
+% eventuale ridefinizione dello stato del documento, da usare con cautela! 
+%\Secret{false}  % da qui in poi il documento compilato mostrerà solo parti pubbliche (non riservate)
+%\Secret{true}   % da qui in poi il documento compilato mostrerà il testo segreto riservato
+%
+% \Draft{true}   % may change initial settings issued while load documentclass 
+% \Draft{false}
+%
+%\Debug{true}    % da qui in poi mostra info di debug
+%
+
+% --------------------------------------------------------------------------------------
+% ---  cover  
+%
+
+%% --- work (elaborato) --- --- ---
+\Author{Autore 1 \\ Autore 2 \\ Autore 3}
+\Title{un manoscritto }
+\Subtitle{lavoro di approfondimento \par corso di \ldots}
+\Date{ver.$\alpha$ ~--~  \today}   % default=\today
+
+%% --- tesi/tesina --- --- ---
+% campi obbligatori: Title Author Course Advisor Date
+% campi facoltativi: Subtitle CoAdvisor
+%\Title{La mia tesi e dintorni} %\\ \mbox{}\\ che sia la volta buona?}
+%\Subtitle{copertina \ldots}%
+%\Author{Pierino La Peste}
+\Course{Corso di Laurea magistrale in 'gneria spaziale}
+%\Subtitle{}%... e quante botte riceverò alla festa ...}
+\Advisor{V.Milanesi} 
+\CoAdvisor{M.S.Gelmini} 
+%\Date{\today {} (ora o mai più)} 
+
+%% --- phdthesis --- --- ---
+%\Title{La mia tesi di dottorato} %\\ \mbox{}\\ che sia la volta buona?}
+%\Subtitle{è stata dura \ldots}%
+%\Author{Pierino La Peste}
+%\Advisor{Pico de Paperis} 
+%\CoAdvisor{M.S.Gelmini} 
+%\Date{\today {} (è finita!)} 
+\Director{M.Bertocco} 
+\PhDCourse{XXI ciclo} 
+
+%% --- userCover --- --- ---
+% \renewcommand{\GMcoverFile}{res/sample-cover.tex}
+% \renewcommand{\GMcover}{user}
+
+% --- end cover ---
+
+
+\ShowDraft   % \Draf equal to 'true' -> show message (.ps only)
+\makeindex   % save data for index of terms
+
+% --- document body -----------------------------------------------------------------------
+
+\begin{document}
+%\selectlanguage{\documentLanguage}
+%\input{res/cover.tex}
+%'\GMcoverFile' \mbox{} \\
+%'\GMcover' \mbox{} \\
+
+\Cover % copertina, frontespizio, ecc.  
+       % (pagine bianche se \ForeignCover=true)
+
+% --- prefazione, e piano dell'opera o sommario ---
+\include{prefazione}     % prefazione, piano dell'opera (se non c'è commentare questa riga)
+ 
+\tableofcontents         % indice
+ 
+% --- introduzione ---
+\include{introduzione}  % introduzione generale 
+% NOTA: se non è previsto un capitolo di introduzione generale e si inizia con un primo capitolo dal titolo diverso (es. 'richiami di algebra'), allora rinominare il file 'introduzione' (es. da introduzione.tex in 'richiami.tex') e il contentuo del comando \chapter{...} al suo interno (es. da \chapter{Introduzione} a \chapter{Richiami di algebra}. Lasciare invece le due righe di comando che seguono, le quali permettono di ricominciare la numerazione di pagina da '1' in caratteri arabi.Gli altri file da includere seguono invece lo schema di cui ai file 'template/void.tex' 
+
+%\include{test}
+
+% ---------------------------------------------------------------------------
+
+% --- corpo del testo ------------
+% qui includere i file che costituiscono il ''corpo del lavoro``
+% esempio di inclusione di file
+% \part{parte prima}
+% \include{capitolo-teoria} % 
+% \include{capitolo-congetture} % 
+% \include{capitolo-progetto} % 
+
+% \part{parte seconda: eseperimenti}
+% \include{esperimento-a} %
+% \include{esperimento-b} %  
+
+
+% --- bibliografia --------------------------------------------------------
+% execute: bibtex <thisfile>
+%      where <thisfile>  is the name of this file
+
+
+\addcontentsline{toc}{chapter}{Bibliografia}
+ \nocite{*} % inserts ALL the references contained in the
+           % ".bib" files defined by the  following "\bibliography{}" commands
+%\bibliography{bib/bib-iq,bib/bib-stat,bib/bib-iq-web.bib}
+\bibliography{bib/bib-latex}
+\bibliographystyle{ieeetr} % acm siam abbrv plain, \emph{alpha, abbrv, ieeetr
+
+
+% --- list of tables and figures (indice delle tabelle, figure) ------------
+\ListOfTables   % genera elenco e aggiunge voce all'indice (nella lingua corretta)
+\ListOfFigures  % genera elenco e aggiunge voce all'indice(nella lingua corretta)
+
+
+% --- indice analitico ------------------------------------------------------
+% run: makeindex -s res/indice.ist <thisfile>.idx
+%\clearpage
+%\addcontentsline{toc}{chapter}{Indice analitico}
+%\printindex
+
+% ---------------------------------------------------------------------------
+
+% --- indice analitico ------------------------------------------------------
+% remember, run: 
+% latex
+% makeindex -s res/indice.ist <thisfile>.idx
+% latex twice again
+\PrintIndex % genera indice analitico, aggiunge voce all'indice (nella lingua corretta)
+
+
+%\ShowDebugInfo
+
+\end{document}

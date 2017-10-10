@@ -1,0 +1,46 @@
+%
+% cover-thesis-special.tex  esempio di generazione copertina per tesi modificabile da utente
+%                           i comandi seguenti ridefiniscono la macro \Cover
+%
+\begin{titlepage}
+  \begin{center}
+     \begin{figure}[h]
+        \centering
+        \includegraphics[width=3cm]{images/unipd-bn.eps}
+     \end{figure}
+    {\Large \bf Universit\`a degli Studi di Padova}\\
+    \vspace{0.2cm}
+    {\large Facolt\`a di Scienze MM.FF.NN.}\\
+    \vspace{0.2cm}
+    {\ifthenelse{\equal{\GMCourse}{}} {\mbox{}} {\GMCourse{} } }\\
+    \vspace{2cm}
+    {tesi di laurea\\ 
+    %\vspace*{\stretch{1}}%
+    \vspace{1cm}}
+    {\Huge \bf \GMTitle{} }\\
+    % sottotitolo
+    \vspace{.5cm}
+    {{\ifthenelse{\equal{\GMSubtitle}{}}
+        { \mbox{}\\ }% sottotitolo vuoto
+        { {\LARGE \sf \bf  \GMSubtitle{} \\ }} % sottotitolo
+    }}%
+  %\vspace*{\stretch{2}}
+  \end{center}
+  \vspace{4cm}
+  \begin{flushleft}
+     \begin{tabular}{ll}
+       {\bf Relatore:} & \GMAdvisor{}\\
+        \ifthenelse{\equal{\GMCoAdvisor}{}} %
+           {\mbox{} \tabularnewline }% \Cotutor vuoto
+           {{\bf \large Correlatore: } & \GMCoAdvisor{} \tabularnewline }
+     \end{tabular}
+  \end{flushleft}
+  \vspace{1cm}
+  \begin{flushright}
+    {\bf Laureando:}  \GMAuthor{}
+  \end{flushright}
+  \vspace{1cm}
+  \begin{center}
+    {\small \GMDate{}}
+  \end{center}%
+\end{titlepage}%
